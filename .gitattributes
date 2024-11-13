@@ -1,1 +1,2 @@
 *.largefileextension filter=lfs diff=lfs merge=lfs -text
+public/model/volvo_s90_recharge_free.glb filter=lfs diff=lfs merge=lfs -text
