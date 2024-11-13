@@ -1,4 +1,8 @@
 /* src/styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
     font-family: 'Montserrat', sans-serif;
     src: url('/fonts/montserrat.woff') format('woff');
