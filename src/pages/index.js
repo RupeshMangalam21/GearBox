@@ -1,9 +1,9 @@
 import Scene from '../components/Scene';
-
+import Header from '../components/header';
 export default function Home() {
     return (
         <div>
-            <h1>GearBox</h1>
+           
             <Scene />
         </div>
     );

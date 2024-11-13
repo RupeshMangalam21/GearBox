@@ -1,23 +1,11 @@
-// src/components/AudioToggleButton.js
-import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";  // Import icons for volume control
+import React from 'react';
+import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 
 const AudioToggleButton = ({ audioPlaying, handleAudioToggle }) => {
   return (
     <button 
       onClick={handleAudioToggle}
-      style={{
-        position: 'absolute',
-        top: '20px',
-        right: '20px',
-        padding: '10px',
-        paddingBottom: '6px',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        color: 'white',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer',
-        zIndex: 10
-      }}
+      className="p-2 bg-gray-800 bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition"
     >
       {audioPlaying ? <FaVolumeUp /> : <FaVolumeMute />}
     </button>
