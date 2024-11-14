@@ -1,28 +1,35 @@
 import React from 'react';
-import AudioToggleButton from './AudioToggleButton';
 
-const Header = ({ audioPlaying, handleAudioToggle }) => {
+const Header = () => {
   return (
-    <header className="absolute top-0 left-0 w-full z-10">
-      <nav className="flex items-center justify-between p-6">
-        <div className="text-white text-2xl font-bold">
-          AutoDiag AI
+    <header className="w-full dark:bg-black bg-white dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] relative flex items-center justify-center h-[20rem] md:h-[10rem] shadow-lg border-b border-gray-700">
+      <nav className="flex items-center justify-between w-full max-w-7xl px-6 md:px-10 py-4">
+        
+        {/* Logo / Title */}
+        <div className="text-2xl md:text-3xl font-bold font-['Roboto Condensed'] text-white hover:text-cobalt-blue transition-colors cursor-pointer">
+          GearBox
         </div>
-        <div className="flex items-center space-x-4">
-          <a href="#about" className="text-white hover:text-gray-300">
+        
+        {/* Navigation Links */}
+        <div className="flex items-center space-x-6 text-white">
+          <a
+            href="#about"
+            className="text-lg md:text-xl font-medium transition-colors hover:text-electric-blue"
+          >
             About
           </a>
-          <a href="#services" className="text-white hover:text-gray-300">
+          <a
+            href="#services"
+            className="text-lg md:text-xl font-medium transition-colors hover:text-electric-blue"
+          >
             Services
           </a>
-          <a href="#contact" className="text-white hover:text-gray-300">
+          <a
+            href="#contact"
+            className="text-lg md:text-xl font-medium transition-colors hover:text-electric-blue"
+          >
             Contact
           </a>
-          {/* Audio Toggle Button */}
-          <AudioToggleButton
-            audioPlaying={audioPlaying}
-            handleAudioToggle={handleAudioToggle}
-          />
         </div>
       </nav>
     </header>
