@@ -3,15 +3,17 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import AudioToggleButton from "./AudioToggleButton";
-import Header from "./header";
+import { useClerk } from '@clerk/clerk-react';
 
 const ThreeDScene = () => {
+
   const canvasRef = useRef(null);
   const audioRef = useRef(null);
   const modelRef = useRef(null);
   const isInteracting = useRef(false);
   const lastMouseX = useRef(0);
   const [audioPlaying, setAudioPlaying] = useState(false);
+  const { openSignIn } = useClerk();
 
   useEffect(() => {
     // Scene setup
@@ -111,7 +113,7 @@ const ThreeDScene = () => {
     const handleMouseMove = (event) => {
       if (isInteracting.current && modelRef.current) {
         const delta = event.clientX - lastMouseX.current;
-        modelRef.current.rotation.y += delta * 0.005; // Adjust sensitivity
+        modelRef.current.rotation.y += delta * 0.005; 
         lastMouseX.current = event.clientX;
       }
     };
@@ -172,21 +174,27 @@ const ThreeDScene = () => {
   return (
     <div
       id="3d-container"
-      className="relative w-full h-screen overflow-hidden bg-black"
+      className="relative w-full h-full overflow-hidden bg-black"
     >
-      <canvas ref={canvasRef} className="w-full h-full" />
+      <canvas ref={canvasRef} className="w-full h-full " />
 
-      {/* Overlay Text */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+      {/* Glass Effect Overlay with text */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10 bg-gray-900 bg-opacity-20 backdrop-blur-lg rounded-md max-w-[40%] mx-10 py-2 h-full ">
+        <h1 className="text-2xl md:text-6xl font-bold text-white mb-2 drop-shadow-lg">
           Revolutionize Vehicle Diagnostics with AI
         </h1>
-        <p className="text-lg md:text-2xl text-gray-200 max-w-2xl drop-shadow-md">
+        <p className="text-lg md:text-2xl text-yellow-400 max-w-2xl drop-shadow-md">
           Harness the power of artificial intelligence to diagnose vehicle performance issues quickly and accurately.
         </p>
-        <button className="mt-8 px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded-full hover:bg-blue-700 transition">
-          Get Started
+      {/* Clerk Login Button */}
+        <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-10">
+        <button 
+          onClick={() => openSignIn()}
+          className="px-6 py-2 my-0 bg-green-600 text-white text-lg font-semibold rounded-full hover:bg-green-700 transition"
+        >
+          Start GearBox
         </button>
+        </div>
       </div>
 
       {/* Audio Toggle Button in the top-right corner */}
@@ -195,8 +203,8 @@ const ThreeDScene = () => {
           audioPlaying={audioPlaying} 
           handleAudioToggle={handleAudioToggle} 
         />
-      </div>
-
+      </div>  
+      
       {/* Hidden audio element */}
       <audio ref={audioRef} loop>
         <source src="/audio/modern-and-futuristic-beats-15s-237355.mp3" type="audio/mp3" />
