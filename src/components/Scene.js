@@ -179,7 +179,7 @@ const ThreeDScene = () => {
       <canvas ref={canvasRef} className="w-full h-full " />
 
       {/* Glass Effect Overlay with text */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10 bg-gray-900 bg-opacity-20 backdrop-blur-lg rounded-md max-w-[40%] mx-10 py-2 h-full ">
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10 bg-gray-900 bg-opacity-20  rounded-md max-w-[40%] mx-10 py-2 h-screen ">
         <h1 className="text-2xl md:text-6xl font-bold text-white mb-2 drop-shadow-lg">
           Revolutionize Vehicle Diagnostics with AI
         </h1>
