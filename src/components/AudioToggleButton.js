@@ -5,7 +5,7 @@ const AudioToggleButton = ({ audioPlaying, handleAudioToggle }) => {
   return (
     <button 
       onClick={handleAudioToggle}
-      className="p-2 bg-gray-800 bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition"
+      className="p-2 bg-yellow-500 bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition"
     >
       {audioPlaying ? <FaVolumeUp /> : <FaVolumeMute />}
     </button>

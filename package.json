@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.15.5",
     "clsx": "^2.1.1",
     "dat.gui": "^0.7.9",
     "framer-motion": "^11.11.13",
