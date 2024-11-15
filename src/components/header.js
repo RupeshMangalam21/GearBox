@@ -1,8 +1,11 @@
 import React from 'react';
+import { useClerk, useUser } from '@clerk/clerk-react';
 
 const Header = () => {
+  const { signOut } = useClerk();
+  const { isSignedIn } = useUser();
   return (
-    <header className="w-full dark:bg-black bg-white dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] relative flex items-center justify-center h-[20rem] md:h-[10rem] shadow-lg border-b border-gray-700">
+    <header className="h-full w-full dark:bg-black bg-black  dark:bg-grid-small-white/[0.2] bg-grid-small-white/[0.2] relative flex items-center justify-center ">
       <nav className="flex items-center justify-between w-full max-w-7xl px-6 md:px-10 py-4">
         
         {/* Logo / Title */}
@@ -31,6 +34,14 @@ const Header = () => {
             Contact
           </a>
         </div>
+        {isSignedIn && (
+        <button 
+          onClick={signOut} 
+          className="px-6 py-3 bg-yellow-600 text-white rounded-full hover:bg-yellow-700 transition"
+        >
+          Log Out
+        </button>
+      )}
       </nav>
     </header>
   );
