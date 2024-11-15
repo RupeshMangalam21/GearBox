@@ -5,12 +5,10 @@ import EcommerceListings from './EcommerceListings';
 import VehicleOBDStats from './VehicleOBDStats';
 import Header from '../components/header';
 import { useClerk } from '@clerk/clerk-react';
-import { div } from 'three/webgpu';
-
 
 const Dashboard = () => {
   const [activeFeature, setActiveFeature] = useState('ecommerce'); 
-
+  const { signOut } = useClerk();
   return (
     <div>
     <Header />
