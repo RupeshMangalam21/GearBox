@@ -68,7 +68,7 @@ const ThreeDScene = () => {
         modelRef.current = model;
 
         model.position.set(4, 0, -1.5);
-        model.scale.set(2.5, 2.5, 2.5);
+        model.scale.set(2.8, 2.8, 2.8);
 
         // Animate the model with automatic horizontal rotation
         const animate = () => {
@@ -179,50 +179,51 @@ const ThreeDScene = () => {
 
   return (
     <div
-      id="3d-container"
-      className="relative w-full h-full overflow-hidden bg-black dark:bg-grid-small-white/[0.2] bg-grid-small-white/[0.2]"
-    >
-      <canvas ref={canvasRef} className="w-full h-full " />
-
-      {/* Glass Effect Overlay with dynamic text */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10  rounded-md max-w-[40%] mx-10 py-0 h-auto ">
-        {/* Title with TextGenerateEffect */}
-        <div className="text-2xl md:text-6xl font-bold text-white mb-2 drop-shadow-lg">
+    id="3d-container"
+    className="relative w-full h-screen overflow-hidden bg-black dark:bg-grid-small-white/[0.2] bg-grid-small-white/[0.2]"
+  >
+    <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+  
+    {/* Glass Effect Overlay */}
+    <div className="absolute inset-0 px-4 z-10 pointer-events-none">
+      {/* Left-aligned text */}
+      <div className="absolute top-10 left-8 max-w-sm text-left">
+        <div className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-2 drop-shadow-lg">
           <TextGenerateEffect words="Revolutionize Vehicle Diagnostics with AI" />
         </div>
-        {/* Description with TextGenerateEffect */}
-        <div className="text-lg md:text-2xl text-yellow-400 max-w-2xl drop-shadow-md">
+        <div className="text-sm sm:text-lg md:text-xl lg:text-2xl text-yellow-400 drop-shadow-md mt-2">
           <TextGenerateEffect words="Harness the power of artificial intelligence to diagnose vehicle performance issues quickly and accurately." />
         </div>
-
-        {/* Clerk Login Button */}
-        <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-10">
-          <button
-            onClick={() => openSignIn()}
-            className="px-6 py-2 my-0 bg-green-600 text-white text-lg font-semibold rounded-full hover:bg-green-700 transition"
-          >
-            Start GearBox
-          </button>
-        </div>
       </div>
-
-      {/* Audio Toggle Button in the top-right corner */}
-      <div className="absolute top-4 right-4 z-10">
-        <AudioToggleButton
-          audioPlaying={audioPlaying}
-          handleAudioToggle={handleAudioToggle}
-        />
-      </div>
-
-      {/* Hidden audio element */}
-      <audio ref={audioRef} loop>
-        <source
-          src="/audio/EnginesOnpororo.mp3"
-          type="audio/mp3"
-        />
-        Your browser does not support the audio element.
-      </audio>
     </div>
+  
+    {/* Button Positioned Separately */}
+    <div className="absolute bottom-24 right-8 z-20 pointer-events-auto">
+      <button
+        onClick={() => openSignIn()}
+        className="px-6 py-2 bg-green-600 text-white text-base sm:text-lg font-semibold rounded-full hover:bg-green-700 transition"
+      >
+        Start GearBox
+      </button>
+    </div>
+  
+    {/* Audio Toggle Button in the top-right corner */}
+    <div className="absolute top-4 right-4 z-20 pointer-events-auto">
+      <AudioToggleButton
+        audioPlaying={audioPlaying}
+        handleAudioToggle={handleAudioToggle}
+      />
+    </div>
+  
+    {/* Hidden audio element */}
+    <audio ref={audioRef} loop>
+      <source src="/audio/EnginesOnpororo.mp3" type="audio/mp3" />
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  
+  
+
   );
 };
 
