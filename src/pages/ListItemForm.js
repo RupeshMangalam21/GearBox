@@ -1,14 +1,45 @@
 import React, { useState } from 'react';
 
-const ListItemForm = () => {
+const ListItemForm = ({ userId }) => {  // Make sure to pass the userId to the form
   const [itemName, setItemName] = useState('');
   const [itemPrice, setItemPrice] = useState('');
   const [itemDescription, setItemDescription] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle item submission logic (e.g., send data to the backend)
-    console.log('Item Listed:', { itemName, itemPrice, itemDescription });
+    if (!itemName || !itemPrice || !itemDescription) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    setLoading(true); // Set loading to true before sending the request
+
+    try {
+      const response = await fetch('/api/items', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: itemName,
+          price: itemPrice,
+          description: itemDescription,
+          userId: userId, // Send the userId
+        }),
+      });
+
+      if (response.ok) {
+        alert('Item listed successfully');
+      } else {
+        alert('Failed to list item');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred while listing the item');
+    }
+
+    setLoading(false); // Reset loading state after request is finished
   };
 
   return (
@@ -44,9 +75,10 @@ const ListItemForm = () => {
 
       <button
         type="submit"
+        disabled={loading}
         className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
       >
-        List Item
+        {loading ? 'Listing Item...' : 'List Item'}
       </button>
     </form>
   );

@@ -3,11 +3,25 @@ import React, { useState } from 'react';
 const VehicleOBDStats = () => {
   const [vehicleRegistered, setVehicleRegistered] = useState(false);
   const [vehicleStats, setVehicleStats] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleRegisterVehicle = () => {
+    setLoading(true);
     setVehicleRegistered(true);
-    // Logic to register the vehicle and fetch OBD stats
-    setVehicleStats({ engineStatus: "Normal", fuelLevel: "Full", speed: "0 mph" });
+    // Simulate fetching OBD stats
+    setTimeout(() => {
+      setVehicleStats({ engineStatus: "Normal", fuelLevel: "Full", speed: "0 mph" });
+      setLoading(false);
+    }, 1000);
+    useEffect(() => {
+      const fetchVehicleStats = async () => {
+        const response = await fetch('/api/vehicle');
+        const data = await response.json();
+        setVehicleStats(data);
+      };
+  
+      fetchVehicleStats();
+    }, []);
   };
 
   return (
@@ -25,9 +39,13 @@ const VehicleOBDStats = () => {
       ) : (
         <div>
           <h3 className="text-xl font-semibold mb-4">Vehicle OBD Stats</h3>
-          <div className="mb-2">Engine Status: {vehicleStats.engineStatus}</div>
-          <div className="mb-2">Fuel Level: {vehicleStats.fuelLevel}</div>
-          <div>Speed: {vehicleStats.speed}</div>
+          {vehicleStats.map((stat) => (
+        <div key={stat.id}>
+          <div>Engine Status: {stat.engineStatus}</div>
+          <div>Fuel Level: {stat.fuelLevel}</div>
+          <div>Speed: {stat.speed}</div>
+        </div>
+      ))}
         </div>
       )}
     </div>
