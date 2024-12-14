@@ -1,7 +1,6 @@
 // pages/api/items.js
 
-import prisma from '../../lib/prisma';  // Ensure you have a Prisma client instance
-
+import prisma from '../../lib/prisma.schema';  
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { name, price, description, userId } = req.body;
